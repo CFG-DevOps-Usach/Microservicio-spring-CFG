@@ -28,18 +28,7 @@ steps:
       organization: 'cfg-devops-usach'
       projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
       scannerMode: 'Other'
-  - task: Docker@2
-    displayName: Docker login
-    inputs:
-      containerRegistry: 'Docker'
-      command: 'login'
-    
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker'
-      repository: 'cristobalfajardo/devops-cristobal'
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'  
+ 
   - task: Gradle@3
     inputs:
       gradleWrapperFile: 'gradlew'
@@ -71,3 +60,15 @@ steps:
       downloadType: 'single'
       artifactName: 'appJar'
       downloadPath: '$(Pipeline.Workspace)'
+  - task: Docker@2
+    displayName: Docker login
+    inputs:
+      containerRegistry: 'Docker'
+      command: 'login'
+    
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Docker'
+      repository: 'cristobalfajardo/devops-cristobal'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'  
