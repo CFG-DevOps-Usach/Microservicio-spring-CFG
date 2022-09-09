@@ -12,36 +12,70 @@ pool:
 
 steps:
 - task: Gradle@3
+  displayName: Build
   inputs:
     gradleWrapperFile: 'gradlew'
-    tasks: 'build jacocoTestReport'
+    tasks: 'build'
     publishJUnitResults: true
-    testResultsFiles: '*/TEST-.xml'
+    testResultsFiles: '**/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
-  displayName: 'Build Plugin'
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonar-conexion2'
+    organization: 'cfg-devops-usach'
+    projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
+    scannerMode: 'Other' 
+- task: Gradle@3
+  displayName: 'Analyze current Branch'
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: "build jacocoTestReport"
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: false
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '3.3'    
 - task: CopyFiles@2
+  displayName: Copia archivos
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     contents: |
-        */build/libs/.jar
-        */build//.xml
+        **/build/libs/*.jar
+        **/build/**/*.xml
     targetFolder: '$(Build.ArtifactStagingDirectory)'
-
 - task: PublishBuildArtifacts@1
+  displayName: Publica artefactos
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: appJar
     publishLocation: 'Container'
-- task: DownloadBuildArtifacts@0
+- task: SonarCloudPrepare@1
   inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'appJar'
-    downloadPath: '$(Pipeline.Workspace)'
-  displayName: Descarga Jar
+    SonarCloud: 'sonar-conexion2'
+    organization: 'cfg-devops-usach'
+    projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
+    projectName: 'Microservicio-spring-CFG'
+    extraProperties: |
+      sonar.coverage.jacoco.xmlReportPaths=$(Pipeline.Workspace)/appJar/build/reports/jacoco/test/jacocoTestReport.xml
+  displayName: 'Preparing Sonarqube Environment'
+- task: sonarcloud-buildbreaker@2
+  inputs:
+    SonarCloud: 'sonar-conexion2'
+    organization: 'cfg-devops-usach'
+- task: Gradle@3
+  displayName: 'Analyze current Branch'
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: "sonarqube"
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '3.3'
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+  displayName: 'Publish Analysis Results'
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonar-conexion2'
