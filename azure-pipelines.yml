@@ -53,6 +53,9 @@ steps:
       pathToPublish: '$(Build.ArtifactStagingDirectory)'
       artifactName: appJar
       publishLocation: 'Container'
+  - task: SonarCloudPublish@1
+    inputs:
+       pollingTimeoutSec: '300'    
   - task: DownloadBuildArtifacts@0
     displayName: Descarga Jar
     inputs:
