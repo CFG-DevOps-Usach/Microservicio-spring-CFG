@@ -72,13 +72,11 @@ steps:
       repository: 'cristobalfajardo/devops-cristobal'
       command: 'build'
       Dockerfile: '**/Dockerfile'
-    tags: latest
   - task: Docker@2
     displayName: Docker push
     inputs:
        containerRegistry: 'Docker'
        repository: 'cristobalfajardo/devops-cristobal'
        command: 'push'
-    tags: 'latest'
     
   
