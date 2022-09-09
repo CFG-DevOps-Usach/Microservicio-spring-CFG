@@ -65,10 +65,20 @@ steps:
     inputs:
       containerRegistry: 'Docker'
       command: 'login'
-    
   - task: Docker@2
+    displayName: Build Image 
     inputs:
       containerRegistry: 'Docker'
       repository: 'cristobalfajardo/devops-cristobal'
-      command: 'buildAndPush'
-      Dockerfile: '**/Dockerfile'  
+      command: 'build'
+      Dockerfile: '**/Dockerfile'
+    tags: latest
+  - task: Docker@2
+    displayName: Docker push
+    inputs:
+       containerRegistry: 'Docker'
+       repository: 'cristobalfajardo/devops-cristobal'
+       command: 'push'
+    tags: 'latest'
+    
+  
