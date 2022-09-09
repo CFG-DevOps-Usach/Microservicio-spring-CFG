@@ -27,15 +27,6 @@ steps:
     organization: 'cfg-devops-usach'
     projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
     scannerMode: 'Other' 
-- task: Gradle@3
-  displayName: 'Analyze current Branch'
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: "build jacocoTestReport"
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: false
-    sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '3.3'    
 - task: CopyFiles@2
   displayName: Copia archivos
   inputs:
