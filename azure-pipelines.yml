@@ -50,7 +50,20 @@ steps:
     inputs:
       pathToPublish: '$(Build.ArtifactStagingDirectory)'
       artifactName: appJar
-      publishLocation: 'Container'  
+      publishLocation: 'Container'
+  - task: SonarCloudPrepare@1
+    inputs:
+       SonarCloud: 'sonar-conexion2'
+       organization: 'cfg-devops-usach'
+       projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
+       projectName: 'Microservicio-spring-CFG'
+       extraProperties: |
+         sonar.coverage.jacoco.xmlReportPaths=$(Pipeline.Workspace)/appJar/build/reports/jacoco/test/jacocoTestReport.xml
+    displayName: 'Preparing Sonarqube Environment'
+  - task: sonarcloud-buildbreaker@2
+    inputs:
+       SonarCloud: 'sonar-conexion2'
+       organization: 'cfg-devops-usach'
   - task: Gradle@3
     displayName: 'Analyze current Branch'
     inputs:
@@ -59,11 +72,11 @@ steps:
        javaHomeOption: 'JDKVersion'
        sonarQubeRunAnalysis: true
        sqGradlePluginVersionChoice: 'specify'
-       sonarQubeGradlePluginVersion: '3.3'  
+       sonarQubeGradlePluginVersion: '3.3'
   - task: SonarCloudPublish@1
     inputs:
        pollingTimeoutSec: '300'
-    displayName: 'Publish Analysis Results'    
+    displayName: 'Publish Analysis Results'
   - task: DownloadBuildArtifacts@0
     displayName: Descarga Jar
     inputs:
