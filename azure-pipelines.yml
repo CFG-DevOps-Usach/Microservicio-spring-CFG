@@ -67,15 +67,7 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
   displayName: 'Publish Analysis Results'
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'sonar-conexion2'
-    organization: 'cfg-devops-usach'
-    projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
-    projectName: 'Microservicio-spring-CFG'
-    extraProperties: |
-      sonar.coverage.jacoco.xmlReportPaths=$(Pipeline.Workspace)/appJar/build/reports/jacoco/test/jacocoTestReport.xml
-  displayName: 'Preparing Sonarqube Environment'
+
 - task: sonarcloud-buildbreaker@2
   inputs:
     SonarCloud: 'sonar-conexion2'
