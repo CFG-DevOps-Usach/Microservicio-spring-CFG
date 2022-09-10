@@ -12,7 +12,7 @@ pool:
 
 steps:
 - task: Gradle@3
-  displayName: Build
+  displayName: Build Gradle
   inputs:
     gradleWrapperFile: 'gradlew'
     tasks: 'build'
@@ -22,13 +22,14 @@ steps:
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
 - task: SonarCloudPrepare@1
+  displayName: Preparar Sonar CLoud
   inputs:
     SonarCloud: 'sonar-conexion2'
     organization: 'cfg-devops-usach'
     projectKey: 'CFG-DevOps-Usach_Microservicio-spring-CFG'
     scannerMode: 'Other' 
 - task: CopyFiles@2
-  displayName: Copia archivos
+  displayName: Copiar archivos
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     contents: |
@@ -49,7 +50,7 @@ steps:
     projectName: 'Microservicio-spring-CFG'
     extraProperties: |
       sonar.coverage.jacoco.xmlReportPaths=$(Pipeline.Workspace)/appJar/build/reports/jacoco/test/jacocoTestReport.xml
-  displayName: 'Preparing Sonarqube Environment'
+  displayName: 'Jacoco Preparing Sonarqube Environment'
 - task: Gradle@3
   displayName: 'Analyze current Branch'
   inputs:
