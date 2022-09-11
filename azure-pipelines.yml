@@ -131,7 +131,7 @@ steps:
     kubernetesCluster: 'aks-getting-started'
     namespace: 'default'
     command: 'expose'
-    arguments: 'deployment devops-cristobal --type=LoadBalancer --name=pet-clinic'
+    arguments: 'deployment devops-cristobal-deploy --type=LoadBalancer --name=pet-clinic'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
   continueOnError: true
