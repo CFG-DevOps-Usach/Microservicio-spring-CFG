@@ -123,3 +123,16 @@ steps:
      arguments: '-f kubernetes/deployment-testing-web.yaml'
      secretType: 'dockerRegistry'
      containerRegistryType: 'Azure Container Registry'
+- task: Kubernetes@1
+  inputs:
+    connectionType: 'Azure Resource Manager'
+    azureSubscriptionEndpoint: 'Connect kubernetes'
+    azureResourceGroup: 'aks-getting-started'
+    kubernetesCluster: 'aks-getting-started'
+    namespace: 'default'
+    command: 'expose'
+    arguments: 'deployment Microservicio-spring-CFG-deployment --type=LoadBalancer --name=pet-clinic'
+    secretType: 'dockerRegistry'
+    containerRegistryType: 'Azure Container Registry'
+  continueOnError: true
+  displayName: Expose deployment
