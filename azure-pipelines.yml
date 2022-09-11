@@ -132,13 +132,13 @@ steps:
     #useClusterAdmin: true
     namespace: 'default'
     command: 'expose'
-    arguments: 'deployment testing-web-deployment --type=LoadBalancer --name=devops-cristobal'
+    arguments: 'deployment testing-web-deployment --type=LoadBalancer --name=devops-cristobals'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
   continueOnError: true
   displayName: Expose deployment
 - script: |
-    ipApp=$(kubectl get services devops-cristobal --output jsonpath='{.spec.clusterIP}
+    ipApp=$(kubectl get services devops-cristobals --output jsonpath='{.spec.clusterIP}
     echo $ipApp
     URLApp=http://$ipApp:8080
     echo $URLApp
