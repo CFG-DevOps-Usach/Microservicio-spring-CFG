@@ -108,12 +108,12 @@ steps:
   inputs:
     kubectlVersion: 'latest'
 - task: Kubernetes@1
-  displayName: Kubernetes login
   inputs:
     connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'Kubernetes'
+    kubernetesServiceEndpoint: 'Connect kubernetes'
     namespace: 'default'
     command: 'login'
+#    command: 'login'
 #- task: Kubernetes@1
 #  displayName: Kubernetes container deploy
 #  inputs:
