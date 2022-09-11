@@ -113,14 +113,13 @@ steps:
     kubernetesServiceEndpoint: 'Connect kubernetes'
     namespace: 'default'
     command: 'login'
-#    command: 'login'
-#- task: Kubernetes@1
-#  displayName: Kubernetes container deploy
-#  inputs:
-#     connectionType: 'Kubernetes Service Connection'
-#     kubernetesServiceEndpoint: 'Kubernetes'
-#     namespace: 'default'
-#     command: 'apply'
-#     arguments: '-f kubernetes/deployment-testing-web.yaml'
-#     secretType: 'dockerRegistry'
-#     containerRegistryType: 'Azure Container Registry'
+- task: Kubernetes@1
+  displayName: Kubernetes container deploy
+  inputs:
+     connectionType: 'Kubernetes Service Connection'
+     kubernetesServiceEndpoint: 'Connect kubernetes'
+     namespace: 'default'
+     command: 'apply'
+     arguments: '-f kubernetes/deployment-testing-web.yaml'
+     secretType: 'dockerRegistry'
+     containerRegistryType: 'Azure Container Registry'
