@@ -132,7 +132,7 @@ steps:
     #useClusterAdmin: true
     namespace: 'default'
     command: 'expose'
-    arguments: 'deployment devops-cristobal-deployment --type=LoadBalancer --name=devops-cristobal'
+    arguments: 'deployment devopscristobal-deployment --type=LoadBalancer --name=devops-cristobal'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
   continueOnError: true
