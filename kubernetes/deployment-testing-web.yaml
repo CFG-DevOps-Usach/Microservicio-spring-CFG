@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: testing-web
-        image: ricdiazb/devops-foundation-lab:latest
+        image: cristobalfajardo/devops-cristobal:latest
         ports:
         - containerPort: 8080
