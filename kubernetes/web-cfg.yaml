@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-CFG
+  name: web-cfg
   labels:
     app: testing-web
 spec:
