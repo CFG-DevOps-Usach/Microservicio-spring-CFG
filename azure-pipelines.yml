@@ -103,3 +103,24 @@ steps:
     repository: 'cristobalfajardo/devops-cristobal'
     command: 'push'
     tags: 'latest'
+- task: KubectlInstaller@0
+  displayName: Install Kubectl
+  inputs:
+    kubectlVersion: 'latest'
+- task: Kubernetes@1
+  displayName: Kubernetes login
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceEndpoint: 'Kubernetes'
+    namespace: 'default'
+    command: 'login'
+#- task: Kubernetes@1
+#  displayName: Kubernetes container deploy
+#  inputs:
+#     connectionType: 'Kubernetes Service Connection'
+#     kubernetesServiceEndpoint: 'Kubernetes'
+#     namespace: 'default'
+#     command: 'apply'
+#     arguments: '-f kubernetes/deployment-testing-web.yaml'
+#     secretType: 'dockerRegistry'
+#     containerRegistryType: 'Azure Container Registry'
