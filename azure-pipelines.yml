@@ -120,7 +120,7 @@ steps:
      kubernetesServiceEndpoint: 'Connect kubernetes'
      namespace: 'default'
      command: 'apply'
-     arguments: '-f kubernetes/web-CFG.yaml'
+     arguments: '-f kubernetes/web-cfg.yaml'
      secretType: 'dockerRegistry'
      containerRegistryType: 'Azure Container Registry'
 - task: Kubernetes@1
@@ -132,7 +132,7 @@ steps:
     #useClusterAdmin: true
     namespace: 'default'
     command: 'expose'
-    arguments: 'deployment web-CFG --type=LoadBalancer --name=devops-cristobalsss'
+    arguments: 'deployment web-cfg --type=LoadBalancer --name=devops-cristobalsss'
     secretType: 'dockerRegistry'
     containerRegistryType: 'Azure Container Registry'
   continueOnError: true
