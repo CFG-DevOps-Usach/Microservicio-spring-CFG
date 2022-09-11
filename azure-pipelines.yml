@@ -127,9 +127,10 @@ steps:
   inputs:
     connectionType: 'Azure Resource Manager'
     azureSubscriptionEndpoint: 'Azure subscription 1(b5825397-99b4-4688-a061-129df71bbf2a)'
-    azureResourceGroup: 'aks-getting-started'
-    kubernetesCluster: 'aks-getting-started'
-    namespace: 'default'
+    azureResourceGroup: 'devop_group'
+    kubernetesCluster: 'devops'
+    #useClusterAdmin: true
+    namespace: 'connect azure'
     command: 'expose'
     arguments: 'deployment devops-cristobal-deploy --type=LoadBalancer --name=devops-cristobal'
     secretType: 'dockerRegistry'
