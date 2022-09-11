@@ -138,13 +138,6 @@ steps:
   displayName: Expose deployment
 - script: |
     ipApp=$(kubectl get services Microservicio-spring-CFG --output jsonpath='{.status.loadBalancer.ingress[0].ip}')
-- task: Kubernetes@1
-  inputs:
-    connectionType: 'Kubernetes Service Connection'
-    kubernetesServiceEndpoint: 'Connect kubernetes'
-    command: 
-    secretType: 'dockerRegistry'
-    containerRegistryType: 'Azure Container Registry'
     echo $ipApp
     URLApp=http://$ipApp:8080
     echo $URLApp
