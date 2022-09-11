@@ -126,7 +126,7 @@ steps:
 - task: Kubernetes@1
   inputs:
     connectionType: 'Azure Resource Manager'
-    azureSubscriptionEndpoint: 'Connect kubernetes'
+    azureSubscriptionEndpoint: 'Azure subscription 1(b5825397-99b4-4688-a061-129df71bbf2a)'
     azureResourceGroup: 'aks-getting-started'
     kubernetesCluster: 'aks-getting-started'
     namespace: 'default'
