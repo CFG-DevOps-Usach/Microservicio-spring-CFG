@@ -138,7 +138,7 @@ steps:
   continueOnError: true
   displayName: Expose deployment
 - script: |
-    ipApp=$(kubectl get services devops-cristobal --output jsonpath=' {.spec.clusterIP}
+    ipApp=$(kubectl get services devops-cristobal --output jsonpath='{.spec.clusterIP}
     echo $ipApp
     URLApp=http://$ipApp:8080
     echo $URLApp
